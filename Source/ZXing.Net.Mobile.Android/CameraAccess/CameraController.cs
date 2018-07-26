@@ -292,6 +292,8 @@ namespace ZXing.Mobile.CameraAccess
                 parameters.SetPreviewSize(resolution.Width, resolution.Height);
             }
 
+            Android.Util.Log.Info(MobileBarcodeScanner.TAG, "Mike: Camera.Parameters.FocusModeFixed");
+            parameters.FocusMode = Camera.Parameters.FocusModeFixed;
             Camera.SetParameters(parameters);
 
             SetCameraDisplayOrientation();
@@ -345,6 +347,8 @@ namespace ZXing.Mobile.CameraAccess
                     {
                         new Camera.Area(new Rect(x, y, x + 20, y + 20), 1000)
                     };
+                    Android.Util.Log.Info(MobileBarcodeScanner.TAG, "Mike: Camera.Parameters.FocusModeFixed");
+                    cameraParams.FocusMode = Camera.Parameters.FocusModeFixed;
                     Camera.SetParameters(cameraParams);
                 }
 
