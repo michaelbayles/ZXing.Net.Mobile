@@ -295,7 +295,7 @@ namespace ZXing.Mobile.CameraAccess
             Android.Util.Log.Info(MobileBarcodeScanner.TAG, "Mike: Camera.Parameters.FocusModeFixed");
             parameters.FocusMode = Camera.Parameters.FocusModeFixed;
             Camera.SetParameters(parameters);
-
+            Camera.AutoFocus(_cameraEventListener);
             SetCameraDisplayOrientation();
         }
 
