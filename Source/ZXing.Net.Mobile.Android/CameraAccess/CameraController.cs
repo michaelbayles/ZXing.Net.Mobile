@@ -100,6 +100,7 @@ namespace ZXing.Mobile.CameraAccess
                 PerformanceCounter.Stop(perf, "Setup Camera Parameters took {0}ms");
             }
 
+            Camera.AutoFocus(_cameraEventListener);
             // Docs suggest if Auto or Macro modes, we should invoke AutoFocus at least once
             var currentFocusMode = Camera.GetParameters().FocusMode;
             if (currentFocusMode == Camera.Parameters.FocusModeAuto
@@ -295,7 +296,6 @@ namespace ZXing.Mobile.CameraAccess
             Android.Util.Log.Info(MobileBarcodeScanner.TAG, "Mike: Camera.Parameters.FocusModeFixed");
             parameters.FocusMode = Camera.Parameters.FocusModeFixed;
             Camera.SetParameters(parameters);
-            Camera.AutoFocus(_cameraEventListener);
             SetCameraDisplayOrientation();
         }
 
