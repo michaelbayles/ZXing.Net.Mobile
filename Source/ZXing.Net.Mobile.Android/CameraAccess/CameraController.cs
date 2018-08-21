@@ -100,7 +100,8 @@ namespace ZXing.Mobile.CameraAccess
                 PerformanceCounter.Stop(perf, "Setup Camera Parameters took {0}ms");
             }
 
-            Camera.AutoFocus(_cameraEventListener);
+            if (_scannerHost.ScanningOptions.DisableAutofocus)
+                Camera.AutoFocus(_cameraEventListener);
             // Docs suggest if Auto or Macro modes, we should invoke AutoFocus at least once
             var currentFocusMode = Camera.GetParameters().FocusMode;
             if (currentFocusMode == Camera.Parameters.FocusModeAuto
@@ -293,8 +294,8 @@ namespace ZXing.Mobile.CameraAccess
                 parameters.SetPreviewSize(resolution.Width, resolution.Height);
             }
 
-            Android.Util.Log.Info(MobileBarcodeScanner.TAG, "Mike: Camera.Parameters.FocusModeFixed");
-            parameters.FocusMode = Camera.Parameters.FocusModeFixed;
+            if (_scannerHost.ScanningOptions.DisableAutofocus)
+                parameters.FocusMode = Camera.Parameters.FocusModeFixed;
             Camera.SetParameters(parameters);
             SetCameraDisplayOrientation();
         }
@@ -347,8 +348,9 @@ namespace ZXing.Mobile.CameraAccess
                     {
                         new Camera.Area(new Rect(x, y, x + 20, y + 20), 1000)
                     };
-                    Android.Util.Log.Info(MobileBarcodeScanner.TAG, "Mike: Camera.Parameters.FocusModeFixed");
-                    cameraParams.FocusMode = Camera.Parameters.FocusModeFixed;
+
+                    if (_scannerHost.ScanningOptions.DisableAutofocus)
+                        cameraParams.FocusMode = Camera.Parameters.FocusModeFixed;
                     Camera.SetParameters(cameraParams);
                 }
 
