@@ -203,6 +203,10 @@ namespace ZXing.Mobile
 				parameters.SetPreviewSize (resolution.Width, resolution.Height);
 			}
 
+            if(options.DisableAutoFocus)
+            {
+                parameters.FocusMode = Android.Hardware.Camera.Parameters.FocusModeFixed;
+            }
 			camera.SetParameters (parameters);
 
 			SetCameraDisplayOrientation (this.activity);
